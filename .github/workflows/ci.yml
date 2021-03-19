@@ -1,0 +1,42 @@
+name: tests
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.6, 3.7, 3.8, 3.9]
+        django-version: ["2.2", "3.0", "3.1"]
+
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        ports:
+        - 5432:5432
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - uses: syphar/restore-pip-download-cache@v1
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip wheel setuptools
+        python -m pip install -r requirements_test.txt
+        python -m pip install django~=${{ matrix.django-version }}
+
+    - name: Test
+      run: |
+        coverage run --source django_saas_email runtests.py

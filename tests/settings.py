@@ -9,7 +9,16 @@ USE_TZ = True
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "__________________________________________________"
 
-DATABASES = {"default": {"ENGINE": "django.db.backends.sqlite3", "NAME": ":memory:"}}
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+    }
+}
 
 ROOT_URLCONF = "tests.urls"
 

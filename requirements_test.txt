@@ -1,7 +1,6 @@
 coverage==4.3.4
 mock>=1.0.1
 flake8>=2.1.0
-tox>=1.7.0
 celery==4.1
 codecov>=2.0.0
 html2text==2016.9.19
@@ -9,5 +8,7 @@ sendgrid==4.1.0
 django-tinymce==2.7.0
 django-anymail==1.2.1
 jsonfield==2.0.2
+django-override-storage==0.3.0
+psycopg2-binary==2.8.6
 
 # Additional test requirements go here
